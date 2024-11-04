@@ -1,12 +1,27 @@
-#include "Paddle.h" // includerea headerului Paddle.h
+#include "C:\Users\Dragos\Documents\GitHub\Poo_proiect\11\Paddle.h"
 
-Paddle::Paddle(int length) : length(length) {} // nițializarea variabilei membru cu constructorul
+Paddle::Paddle(float x, float y, float latime)
+    : pozitieX(x), pozitieY(y), latime(latime) {} // initializare a pozitiei si latimii
 
-void Paddle::moveLeft() { /* logica pentru a mișca paleta la stânga */ } // definirea funcției pentru a mișca paleta la stnga
+Paddle::Paddle(const Paddle& alta)
+    : pozitieX(alta.pozitieX), pozitieY(alta.pozitieY), latime(alta.latime) {} // constructor de copiere
 
-void Paddle::moveRight() { /* Logica pentru a mișca paleta la dreapta */ } // Definirea funcției pentru a mișca paleta la dreapta
+Paddle& Paddle::operator=(const Paddle& alta) { // operator= de copiere
+    if (this != &alta) { // verifica daca nu se copiaza in sine
+        pozitieX = alta.pozitieX; // copiaza pozitia X
+        pozitieY = alta.pozitieY; // copiaza pozitia Y
+        latime = alta.latime; // copiaza latimea
+    }
+    return *this; // returneaza obiectul curent
+}
 
-std::ostream& operator<<(std::ostream &os, const Paddle &paddle) { // Definirea operatorului de afișare
-    os << "Paddle[length: " << paddle.length << "]"; // afișeaza valoarea variabilei membru
-    return os; // Returneaza fluxul de ieșire
+Paddle::~Paddle() {} // destructor
+
+void Paddle::muta(float deltaX) { // muta paddle-ul
+    pozitieX += deltaX; // actualizeaza pozitia paddle-ului
+}
+
+std::ostream& operator<<(std::ostream& os, const Paddle& rame) { // operator de afisare
+    os << "Paddle[x: " << rame.pozitieX << ", y: " << rame.pozitieY << ", latime: " << rame.latime << "]"; // afiseaza informatiile despre paddle
+    return os; // returneaza fluxul de iesire
 }

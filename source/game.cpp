@@ -1,16 +1,21 @@
-#include "Game.h" // includerea headerului Game.h
+#include "C:\Users\Dragos\Documents\GitHub\Poo_proiect\11\Game.h"
 
-Game::Game(Ball ball, Paddle paddle, std::vector<Brick> bricks)
-   : ball(ball), paddle(paddle), bricks(bricks) {} // inițializarea variabilelor membru cu constructorul
+Game::Game(const Ball& mingea, const Paddle& rame)
+    : mingea(mingea), rame(rame) {} // initializare a jocului
 
-void Game::start() { /* inițializarea starii jocului și pornirea acestuia */ } // Definirea funcției de start
+void Game::adaugaBrick(const Brick& caramida) { // adauga un brick
+    caramizi.push_back(caramida); // adauga brick-ul in vector
+}
 
-void Game::update() { /* actualizarea starii jocului */ } // definirea funcției de update
+void Game::actualizeaza() { // actualizeaza starea jocului
+    mingea.muta(); // muta mingea
+    // logica pentru a verifica coliziunile ar fi aici
+}
 
-std::ostream& operator<<(std::ostream &os, const Game &game) { // definirea operatorului de afișare
-    os << "Game[ball: " << game.ball << ", paddle: " << game.paddle << "]"; // afiseaza obiectele Ball și Paddle
-    for (const auto &brick : game.bricks) { // iterează prin vectorul de Brick-uri
-        os << ", brick: " << brick; // afișeaza fiecare Brick
+void Game::afiseaza() const { // afiseaza starea jocului
+    std::cout << mingea << std::endl; // afiseaza mingea
+    std::cout << rame << std::endl; // afiseaza paddle-ul
+    for (const auto& caramida : caramizi) { // parcurge toate brick-urile
+        std::cout << caramida << std::endl; // afiseaza brick-ul
     }
-    return os; // returneaza fluxul de ieșire
 }
