@@ -1,20 +1,20 @@
-// main.cpp
-#include "Ball.h"
-#include "Paddle.h"
-#include "Brick.h"
-#include "Game.h"
+#include "ball.h" // include header-ul pentru clasa ball
+#include "paddle.h" // include header-ul pentru clasa paddle
+#include "brick.h" // include header-ul pentru clasa brick
+#include "game.h" // include header-ul pentru clasa game
 
 int main() {
-    Ball ball(0, 0, 10);
-    Paddle paddle(5);
-    std::vector<Brick> bricks = { Brick(0, 0, false), Brick(1, 0, false) };
-    Game game(ball, paddle, bricks);
+    ball ball(0, 0, 10); // creeaza un obiect ball cu coordonatele (0, 0) si viteza 10
+    paddle paddle(5); // creeaza un obiect paddle cu lungimea 5
+    std::vector<brick> bricks = { brick(0, 0, false), brick(1, 0, false) }; // creeaza un vector de obiecte brick; fiecare caramida are coordonatele si starea de distrugere
+    game game(ball, paddle, bricks); // creeaza un obiect game care include mingea, paleta si caramizile
 
-    game.start();
-    game.update();
-    std::cout << ball << std::endl;
-    std::cout << paddle << std::endl;
-    std::cout << game << std::endl;
+    game.start(); // initializeaza si incepe jocul
+    game.update(); // actualizeaza starea jocului
+    std::cout << ball << std::endl; // afiseaza informatiile despre mingea curenta
+    std::cout << paddle << std::endl; // afiseaza informatiile despre paleta
+    std::cout << game << std::endl; // afiseaza informatiile despre joc (mingea, paleta si caramizile)
 
-    return 0;
+    return 0; // returneaza 0 indicand ca programul s-a terminat cu succes
 }
+
