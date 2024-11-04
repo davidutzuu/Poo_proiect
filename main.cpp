@@ -1,57 +1,84 @@
 #include <iostream>
-#include <array>
+#include <vector>
 
-#include <Helper.h>
+class Ball {
+   int x, y;
+   int speed;
+   public:
+      Ball(int x, int y, int speed) : x(x), y(y), speed(speed) {}
+      Ball(const Ball &other) : x(other.x), y(other.y), speed(other.speed) {}
+      Ball& operator=(const Ball &other) {
+         if (this == &other) return *this;
+         x = other.x;
+         y = other.y;
+         speed = other.speed;
+         return *this;
+      }
+      ~Ball() {}
+
+      void move() { /* Logic to move the ball */ }
+
+      friend std::ostream& operator<<(std::ostream &os, const Ball &ball) {
+         os << "Ball[x: " << ball.x << ", y: " << ball.y << ", speed: " << ball.speed << "]";
+         return os;
+      }
+};
+
+class Paddle {
+   int length;
+   public:
+      Paddle(int length) : length(length) {}
+      void moveLeft() { /* Logic to move paddle left */ }
+      void moveRight() { /* Logic to move paddle right */ }
+
+      friend std::ostream& operator<<(std::ostream &os, const Paddle &paddle) {
+         os << "Paddle[length: " << paddle.length << "]";
+         return os;
+      }
+};
+
+class Brick {
+   int x, y;
+   bool destroyed;
+   public:
+      Brick(int x, int y, bool destroyed) : x(x), y(y), destroyed(destroyed) {}
+
+      friend std::ostream& operator<<(std::ostream &os, const Brick &brick) {
+         os << "Brick[x: " << brick.x << ", y: " << brick.y << ", destroyed: " << brick.destroyed << "]";
+         return os;
+      }
+};
+
+class Game {
+   Ball ball;
+   Paddle paddle;
+   std::vector<Brick> bricks;
+   public:
+      Game(Ball ball, Paddle paddle, std::vector<Brick> bricks)
+         : ball(ball), paddle(paddle), bricks(bricks) {}
+      void start() { /* Initialize game state and start */ }
+      void update() { /* Update game state */ }
+
+      friend std::ostream& operator<<(std::ostream &os, const Game &game) {
+         os << "Game[ball: " << game.ball << ", paddle: " << game.paddle << "]";
+         for (const auto &brick : game.bricks) {
+            os << ", brick: " << brick;
+         }
+         return os;
+      }
+};
 
 int main() {
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
-    /////////////////////////////////////////////////////////////////////////
-    /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
-    /// dați exemple de date de intrare folosind fișierul tastatura.txt
-    /// Trebuie să aveți în fișierul tastatura.txt suficiente date de intrare
-    /// (în formatul impus de voi) astfel încât execuția programului să se încheie.
-    /// De asemenea, trebuie să adăugați în acest fișier date de intrare
-    /// pentru cât mai multe ramuri de execuție.
-    /// Dorim să facem acest lucru pentru a automatiza testarea codului, fără să
-    /// mai pierdem timp de fiecare dată să introducem de la zero aceleași date de intrare.
-    ///
-    /// Pe GitHub Actions (bife), fișierul tastatura.txt este folosit
-    /// pentru a simula date introduse de la tastatură.
-    /// Bifele verifică dacă programul are erori de compilare, erori de memorie și memory leaks.
-    ///
-    /// Dacă nu puneți în tastatura.txt suficiente date de intrare, îmi rezerv dreptul să vă
-    /// testez codul cu ce date de intrare am chef și să nu pun notă dacă găsesc vreun bug.
-    /// Impun această cerință ca să învățați să faceți un demo și să arătați părțile din
-    /// program care merg (și să le evitați pe cele care nu merg).
-    ///
-    /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
-    }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
-    /// alt fișier propriu cu ce alt nume doriți.
-    /// Exemplu:
-    /// std::ifstream fis("date.txt");
-    /// for(int i = 0; i < nr2; ++i)
-    ///     fis >> v2[i];
-    ///
-    ///////////////////////////////////////////////////////////////////////////
-    ///                Exemplu de utilizare cod generat                     ///
-    ///////////////////////////////////////////////////////////////////////////
-    Helper helper;
-    helper.help();
-    ///////////////////////////////////////////////////////////////////////////
-    return 0;
+   Ball ball(0, 0, 10);
+   Paddle paddle(5);
+   std::vector<Brick> bricks = { Brick(0, 0, false), Brick(1, 0, false) };
+   Game game(ball, paddle, bricks);
+
+   game.start();
+   game.update();
+   std::cout << ball << std::endl;
+   std::cout << paddle << std::endl;
+   std::cout << game << std::endl;
+
+   return 0;
 }
