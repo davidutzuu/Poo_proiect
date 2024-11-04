@@ -1,19 +1,14 @@
-#ifndef BALL_H
-#define BALL_H
+#ifndef BRICK_H
+#define BRICK_H // din nou, include guard pentru a preveni includerea multipla
 #include <iostream>
 
-class Ball {
-    int x, y;
-    int speed;
+class Brick { // Definirea clasei Brick
+    int x, y; // variabile pentru poziția cărămizii
+    bool destroyed; // Dvariabila pentru starea cărămizii (distrusă sau nu)
 public:
-    Ball(int x, int y, int speed);
-    Ball(const Ball &other);
-    Ball& operator=(const Ball &other);
-    ~Ball();
-
-    void move();
-    friend std::ostream& operator<<(std::ostream &os, const Ball &ball);
+    Brick(int x, int y, bool destroyed); // constructor cu parametri
+    friend std::ostream& operator<<(std::ostream &os, const Brick &brick); // Declarația operatorului de afișare
 };
 
-#endif // BALL_H
+#endif // BRICK_H
 

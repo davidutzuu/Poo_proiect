@@ -1,14 +1,14 @@
-#ifndef PADDLE_H
-#define PADDLE_H
-#include <iostream>
+#ifndef PADDLE_H // Include guard pentru a preveni includerea multiplă
+#define PADDLE_H // Include guard pentru a preveni includerea multiplă
+#include <iostream> // Includerea bibliotecii iostream pentru operațiile de intrare/ieșire
 
-class Paddle {
-    int length;
+class Paddle { // Definirea clasei Paddle
+    int length; // Declarația variabilei private pentru lungimea paletei
 public:
-    Paddle(int length);
-    void moveLeft();
-    void moveRight();
-    friend std::ostream& operator<<(std::ostream &os, const Paddle &paddle);
+    Paddle(int length); // Constructor cu parametri
+    void moveLeft(); // Declarația funcției pentru a mișca paleta la stânga
+    void moveRight(); // Declarația funcției pentru a mișca paleta la dreapta
+    friend std::ostream& operator<<(std::ostream &os, const Paddle &paddle); // Declarația operatorului de afișare
 };
 
 #endif // PADDLE_H
