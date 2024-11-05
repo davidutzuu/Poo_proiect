@@ -12,11 +12,13 @@ public:
     Ball(float x, float y, float vitezaX, float vitezaY); // constructor de initializare
     Ball(const Ball& alta); // constructor de copiere
     Ball& operator=(const Ball& alta); // operator= de copiere
-    ~Ball(); // destructor
+    ~Ball(); // destructor care va fi apelat automat cnd obiectul este distrus
 
     void muta(); // muta mingea
     void pocneste(); // inverseaza directia mingii
-    friend std::ostream& operator<<(std::ostream& os, const Ball& mingea); // operator<<
+    friend std::ostream& operator<<(std::ostream& os, const Ball& mingea); // operator<< care permite afișarea informațiilor
+                                                                          //despre mingea în fluxul de ieșire.
+
 };
 
 #endif // BALL_H

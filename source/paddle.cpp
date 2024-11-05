@@ -1,7 +1,7 @@
 #include "C:\Users\Dragos\Documents\GitHub\Poo_proiect\11\Paddle.h"
 
 Paddle::Paddle(float x, float y, float latime)
-    : pozitieX(x), pozitieY(y), latime(latime) {} // initializare a pozitiei si latimii
+    : pozitieX(x), pozitieY(y), latime(latime) {} // constructorde initializare a pozitiei si latimii
 
 Paddle::Paddle(const Paddle& alta)
     : pozitieX(alta.pozitieX), pozitieY(alta.pozitieY), latime(alta.latime) {} // constructor de copiere

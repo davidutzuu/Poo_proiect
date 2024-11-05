@@ -11,7 +11,7 @@ private:
 public:
     Brick(float x, float y); // constructor de initializare
     Brick(const Brick& alta); // constructor de copiere
-    Brick& operator=(const Brick& alta); // operator= de copiere
+    Brick& operator=(const Brick& alta); // operator= de copiere pentru a copia datele unui brick in altul
     ~Brick(); // destructor
 
     void loveste(); // distruge brick-ul
