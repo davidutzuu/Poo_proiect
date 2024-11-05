@@ -1,7 +1,7 @@
 #ifndef BRICK_H
 #define BRICK_H
 
-#include <iostream> // include biblioteca iostream pentru afisare
+#include <iostream>
 
 class Brick { // clasa pentru brick
 private:

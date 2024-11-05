@@ -1,7 +1,7 @@
 #include "C:\Users\Dragos\Documents\GitHub\Poo_proiect\11\Game.h"
 
 Game::Game(const Ball& mingea, const Paddle& rame)
-    : mingea(mingea), rame(rame) {} // initializare a jocului
+    : mingea(mingea), rame(rame) {} // initializarea jocului
 
 void Game::adaugaBrick(const Brick& caramida) { // adauga un brick
     caramizi.push_back(caramida); // adauga brick-ul in vector
@@ -9,7 +9,6 @@ void Game::adaugaBrick(const Brick& caramida) { // adauga un brick
 
 void Game::actualizeaza() { // actualizeaza starea jocului
     mingea.muta(); // muta mingea
-    // logica pentru a verifica coliziunile ar fi aici
 }
 
 void Game::afiseaza() const { // afiseaza starea jocului

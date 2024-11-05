@@ -1,7 +1,7 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-#include <iostream> // include biblioteca iostream pentru afisare
+#include <iostream>
 
 class Paddle { // clasa pentru paddle
 private:

@@ -1,9 +1,9 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include <iostream> // include biblioteca iostream pentru afisare
+#include <iostream>
 
-class Ball { // clasa pentru mingea
+class Ball { // clasa pentru minge
 private:
     float pozitieX, pozitieY; // pozitia mingii
     float vitezaX, vitezaY; // viteza mingii
