@@ -1,27 +1,20 @@
-#include "C:\Users\Dragos\Documents\GitHub\Poo_proiect\11\Paddle.h"
+#include "Paddle.h"
+#include <iostream>
 
-Paddle::Paddle(float x, float y, float latime)
-    : pozitieX(x), pozitieY(y), latime(latime) {} // constructorde initializare a pozitiei si latimii
+Paddle::Paddle(float x, float y, float width, float height, float speed)
+    : GameObject(x, y), width(width), height(height), speed(speed) {}
 
-Paddle::Paddle(const Paddle& alta)
-    : pozitieX(alta.pozitieX), pozitieY(alta.pozitieY), latime(alta.latime) {} // constructor de copiere
-
-Paddle& Paddle::operator=(const Paddle& alta) { // operator= de copiere
-    if (this != &alta) { // verifica daca nu se copiaza in sine
-        pozitieX = alta.pozitieX; // copiaza pozitia X
-        pozitieY = alta.pozitieY; // copiaza pozitia Y
-        latime = alta.latime; // copiaza latimea
-    }
-    return *this; // returneaza obiectul curent
+void Paddle::update() {
+    // Simulare mutare (ex. input stânga-dreapta)
+    // Exemplu simplu (poate fi înlocuit cu input real)
+    if (x > 0) x -= speed; // Mutare stânga
+    if (x < 800 - width) x += speed; // Mutare dreapta
 }
 
-Paddle::~Paddle() {} // destructor
-
-void Paddle::muta(float deltaX) { // muta paddle-ul
-    pozitieX += deltaX; // actualizeaza pozitia paddle-ului
+void Paddle::draw() const {
+    std::cout << "Drawing Paddle at (" << x << ", " << y << ")\n";
 }
 
-std::ostream& operator<<(std::ostream& os, const Paddle& rame) { // operator de afisare
-    os << "Paddle[x: " << rame.pozitieX << ", y: " << rame.pozitieY << ", latime: " << rame.latime << "]"; // afiseaza informatiile despre paddle
-    return os; // returneaza fluxul de iesire
+std::unique_ptr<GameObject> Paddle::clone() const {
+    return std::make_unique<Paddle>(*this);
 }

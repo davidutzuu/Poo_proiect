@@ -1,22 +1,18 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Ball.h" // include clasa Ball
-#include "Paddle.h" // include clasa Paddle
-#include "Brick.h" // include clasa Brick
-#include <vector> // include vector pentru lista de brick-uri
+#include <vector>
+#include <memory>
+#include "GameObject.h"
 
-class Game { // clasa pentru joc
+class Game {
 private:
-    Ball mingea; // mingea
-    Paddle rame; // paddle-ul
-    std::vector<Brick> caramizi; // brick-urile
+    std::vector<std::unique_ptr<GameObject>> objects;
 
 public:
-    Game(const Ball& mingea, const Paddle& rame); // constructor de initializare
-    void adaugaBrick(const Brick& caramida); // adauga un brick
-    void actualizeaza(); // actualizeaza starea jocului
-    void afiseaza() const; // afiseaza starea jocului
+    void addObject(std::unique_ptr<GameObject> obj);
+    void update();
+    void draw() const;
 };
 
 #endif // GAME_H

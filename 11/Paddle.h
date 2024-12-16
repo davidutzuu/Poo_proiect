@@ -1,21 +1,20 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-#include <iostream>
+#include "GameObject.h"
 
-class Paddle { // clasa pentru paddle
+class Paddle : public GameObject {
 private:
-    float pozitieX, pozitieY; // pozitia paddle-ului
-    float latime; // latimea paddle-ului
+    float width, height;
+    float speed;
 
 public:
-    Paddle(float x, float y, float latime); // constructor de initializare
-    Paddle(const Paddle& alta); // constructor de copiere
-    Paddle& operator=(const Paddle& alta); // operator= de copiere
-    ~Paddle(); // destructor
+    Paddle(float x, float y, float width, float height, float speed);
 
-    void muta(float deltaX); // muta paddle-ul
-    friend std::ostream& operator<<(std::ostream& os, const Paddle& rame); // operator<<
+    void update() override;
+    void draw() const override;
+
+    std::unique_ptr<GameObject> clone() const override;
 };
 
 #endif // PADDLE_H

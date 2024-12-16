@@ -1,22 +1,19 @@
 #ifndef BRICK_H
 #define BRICK_H
 
-#include <iostream>
+#include "GameObject.h"
 
-class Brick { // clasa pentru brick
+class Brick : public GameObject {
 private:
-    float pozitieX, pozitieY; // pozitia brick-ului
-    bool distrusa; // starea brick-ului
-
+    bool destroyed;
 public:
-    Brick(float x, float y); // constructor de initializare
-    Brick(const Brick& alta); // constructor de copiere
-    Brick& operator=(const Brick& alta); // operator= de copiere pentru a copia datele unui brick in altul
-    ~Brick(); // destructor
+    Brick(float x, float y);
 
-    void loveste(); // distruge brick-ul
-    bool esteDistrusa() const; // verifica daca brick-ul este distrus
-    friend std::ostream& operator<<(std::ostream& os, const Brick& caramida); // operator<<
+    void update() override;
+    void draw() const override;
+
+    void destroy();
+    std::unique_ptr<GameObject> clone() const override;
 };
 
 #endif // BRICK_H

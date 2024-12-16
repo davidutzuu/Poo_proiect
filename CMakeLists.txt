@@ -53,6 +53,8 @@ add_executable(${PROJECT_NAME}
         source/brick.cpp
         source/game.cpp
         source/paddle.cpp
+        11/GAMEOBJECT.h
+        source/main.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

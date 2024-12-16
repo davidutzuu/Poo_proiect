@@ -1,30 +1,22 @@
-#include "C:\Users\Dragos\Documents\GitHub\Poo_proiect\11\Brick.h"
+#include "Brick.h"
+#include <iostream>
 
-Brick::Brick(float x, float y) : pozitieX(x), pozitieY(y), distrusa(false) {} // initializare a pozitiei si starii
+Brick::Brick(float x, float y) : GameObject(x, y), destroyed(false) {}
 
-Brick::Brick(const Brick& alta)
-    : pozitieX(alta.pozitieX), pozitieY(alta.pozitieY), distrusa(alta.distrusa) {} // constructor de copiere
+void Brick::update() {
+    // Brick nu se mișcă, dar poate avea logică suplimentară
+}
 
-Brick& Brick::operator=(const Brick& alta) { // operator= de copiere
-    if (this != &alta) { // verifica daca nu se copiaza in sine
-        pozitieX = alta.pozitieX; // copiaza pozitia X
-        pozitieY = alta.pozitieY; // copiaza pozitia Y
-        distrusa = alta.distrusa; // copiaza starea
+void Brick::draw() const {
+    if (!destroyed) {
+        std::cout << "Drawing Brick at (" << x << ", " << y << ")\n";
     }
-    return *this; // returneaza obiectul curent
 }
 
-Brick::~Brick() {} // destructor
-
-void Brick::loveste() { // distruge brick-ul
-    distrusa = true; // seteaza starea ca fiind distrusa
+void Brick::destroy() {
+    destroyed = true;
 }
 
-bool Brick::esteDistrusa() const { // verifica daca brick-ul este distrus
-    return distrusa; // returneaza starea
-}
-
-std::ostream& operator<<(std::ostream& os, const Brick& caramida) { // operator de afisare
-    os << "Brick[x: " << caramida.pozitieX << ", y: " << caramida.pozitieY << ", distrusa: " << (caramida.distrusa ? "da" : "nu") << "]"; // afiseaza informatiile despre brick
-    return os; // returneaza fluxul de iesire
+std::unique_ptr<GameObject> Brick::clone() const {
+    return std::make_unique<Brick>(*this);
 }
