@@ -1,21 +1,25 @@
-#include "Game.h"
-#include "Ball.h"
-#include "Brick.h"
-#include "Paddle.h"
+#include "C:\\Users\\Admin\\Documents\\GitHub\\Poo_proiect\\11\\Game.h"
+#include <iostream>
 
 int main() {
-    Game game;
+    Game* game = Game::getInstance(); // Obținem instanța Singleton a jocului.
+    game->initialize();
 
-    // Adaugăm obiecte în joc
-    game.addObject(std::make_unique<Ball>(100, 100, 10, 2, 3));
-    game.addObject(std::make_unique<Brick>(200, 150));
-    game.addObject(std::make_unique<Paddle>(300, 500, 80, 20, 5));
-
-    // Simulare simplă
-    for (int i = 0; i < 10; ++i) {
-        game.update();
-        game.draw();
+    while (game->isRunning()) {
+        char input;
+        std::cout << "Enter command (a: left, d: right, q: quit): ";
+        std::cin >> input;
+        try {
+            game->handleInput(input);
+        } catch (const std::exception &e) {
+            std::cerr << "Error: " << e.what() << std::endl;
+        }
+        game->update();
+        game->render();
     }
 
+    std::cout << "Game Over!" << std::endl;
+
+    Game::destroyInstance(); // Eliberăm memoria Singleton.
     return 0;
 }

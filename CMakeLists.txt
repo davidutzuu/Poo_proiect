@@ -55,6 +55,7 @@ add_executable(${PROJECT_NAME}
         source/paddle.cpp
         11/GAMEOBJECT.h
         source/main.cpp
+        11/BrickFactory.h
 )
 
 include(cmake/CompilerFlags.cmake)
@@ -81,3 +82,24 @@ include(cmake/CopyHelper.cmake)
 copy_files(FILES tastatura.txt)
 # copy_files(FILES tastatura.txt config.json DIRECTORY images sounds)
 # copy_files(DIRECTORY images sounds)
+cmake_minimum_required(VERSION 3.10) # Setează versiunea minimă de CMake
+project(Poo_proiect)                # Numele proiectului
+
+# Specifică standardul C++ folosit
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Include directoare pentru fișierele .h
+include_directories(include)
+
+# Adaugă fișierele sursă la proiect
+set(SOURCES
+        source/Ball.cpp
+        source/Brick.cpp
+        source/Paddle.cpp
+        source/Game.cpp
+        source/main.cpp
+)
+
+# Crează executabilul
+add_executable(Poo_proiect ${SOURCES})

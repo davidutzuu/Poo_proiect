@@ -1,20 +1,47 @@
-#include "Paddle.h"
-#include <iostream>
+#include "C:\Users/Admin/Documents/GitHub/Poo_proiect/11/Paddle.h"
 
 Paddle::Paddle(float x, float y, float width, float height, float speed)
-    : GameObject(x, y), width(width), height(height), speed(speed) {}
+    : x(x), y(y), width(width), height(height), speed(speed) {}
 
-void Paddle::update() {
-    // Simulare mutare (ex. input stânga-dreapta)
-    // Exemplu simplu (poate fi înlocuit cu input real)
-    if (x > 0) x -= speed; // Mutare stânga
-    if (x < 800 - width) x += speed; // Mutare dreapta
+// Misca platforma la stanga, actualizand pozitia pe axa X.
+void Paddle::moveLeft() {
+    x -= speed;
+    if (x < 0) { // Previne iesirea platformei din ecran pe partea stanga.
+        x = 0;
+    }
 }
 
-void Paddle::draw() const {
-    std::cout << "Drawing Paddle at (" << x << ", " << y << ")\n";
+// Misca platforma la dreapta, actualizand pozitia pe axa X.
+void Paddle::moveRight() {
+    x += speed;
+    if (x + width > 800) { // Previne iesirea platformei din ecran pe partea dreapta (presupunem ca latimea ecranului e 800).
+        x = 800 - width;
+    }
 }
 
-std::unique_ptr<GameObject> Paddle::clone() const {
-    return std::make_unique<Paddle>(*this);
+float Paddle::getX() const {
+    return x;
+}
+
+float Paddle::getY() const {
+    return y;
+}
+
+float Paddle::getWidth() const {
+    return width;
+}
+
+float Paddle::getHeight() const {
+    return height;
+}
+
+// Renderizeaza pozitia si dimensiunile platformei.
+void Paddle::render() const {
+    std::cout << "Rendering Paddle at (" << x << ", " << y << ") size: " << width << "x" << height << std::endl;
+}
+
+// Supraincarcam operatorul << pentru a afisa informatii despre platforma.
+std::ostream &operator<<(std::ostream &os, const Paddle &paddle) {
+    os << "Paddle at (" << paddle.x << ", " << paddle.y << ") size: " << paddle.width << "x" << paddle.height;
+    return os;
 }

@@ -1,21 +1,12 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef GAME_OBJECT_H
+#define GAME_OBJECT_H
 
-#include <memory>
-#include <iostream>
-
-// Clasa de bază pentru toate obiectele din joc
+// Clasa de baza abstracta pentru toate obiectele din joc (ex. Ball, Brick, Paddle).
 class GameObject {
-protected:
-    float x, y; // Coordonate obiect
 public:
-    GameObject(float x, float y) : x(x), y(y) {}
-    virtual ~GameObject() = default;
-
-    virtual void update() = 0; // Funcție virtuală pură pentru actualizare
-    virtual void draw() const = 0; // Funcție virtuală pură pentru afișare
-
-    virtual std::unique_ptr<GameObject> clone() const = 0; // Constructor virtual (clone)
+    // Metoda virtuala pura pentru a implementa renderizarea in clasele derivate.
+    virtual void render() const = 0;
+    virtual ~GameObject() = default; // Destructor virtual.
 };
 
-#endif // GAMEOBJECT_H
+#endif // GAME_OBJECT_H
