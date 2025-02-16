@@ -1,5 +1,6 @@
-#include "C:\\Users\\Admin\\Documents\\GitHub\\Poo_proiect\\11\\Game.h"
-#include <iostream>
+#include "C:\Users/Admin/Documents/GitHub/Poo_proiect/11/Game.h"
+
+Game* Game::instance = nullptr;
 
 Game::Game()
     : ball(400, 300, 10, 5, 5), paddle(350, 580, 100, 20, 10), score(0), running(true) {
@@ -11,71 +12,33 @@ Game::Game()
     }
 }
 
+Game* Game::getInstance() {
+    if (!instance)
+        instance = new Game();
+    return instance;
+}
+
+void Game::destroyInstance() {
+    delete instance;
+    instance = nullptr;
+}
+
 void Game::initialize() {
     std::cout << "Jocul a fost initializat." << std::endl;
 }
 
 void Game::update() {
-    ball.move();
-
-    // Detectare coliziuni cu pereti
-    if (ball.getX() <= 0 || ball.getX() + ball.getRadius() >= 800) {
-        ball.bounce(false);
-    }
-    if (ball.getY() <= 0) {
-        ball.bounce(true);
-    }
-
-    // Detectare coliziune cu paddle
-    if (ball.getY() + ball.getRadius() >= paddle.getY() &&
-        ball.getX() >= paddle.getX() &&
-        ball.getX() <= paddle.getX() + paddle.getWidth()) {
-        ball.bounce(true);
-    }
-
-    // Detectare coliziune cu bricks
-    for (auto &brick : bricks) {
-        if (!brick.isDestroyed() &&
-            ball.getX() + ball.getRadius() >= brick.getX() &&
-            ball.getX() <= brick.getX() + brick.getWidth() &&
-            ball.getY() + ball.getRadius() >= brick.getY() &&
-            ball.getY() <= brick.getY() + brick.getHeight()) {
-            ball.bounce(true);
-            brick.hit();
-            score += 10;
-        }
-    }
-
-    // Verificare daca mingea a iesit din joc
-    if (ball.getY() > 600) {
-        running = false;
-    }
+    // Logica actualizării jocului
 }
 
 void Game::render() {
-    std::cout << "Scor: " << score << std::endl;
-    std::cout << ball << std::endl;
-    std::cout << paddle << std::endl;
-    for (const auto &brick : bricks) {
-        if (!brick.isDestroyed()) {
-            std::cout << brick << std::endl;
-        }
-    }
-}
-
-[[nodiscard]] bool Game::isRunning() const {
-    return running;
+    // Redesenarea jocului
 }
 
 void Game::handleInput(char input) {
-    if (input == 'a') {
-        paddle.moveLeft();
-    } else if (input == 'd') {
-        paddle.moveRight();
-    }
+    // Gestionarea input-ului
 }
 
-std::ostream &operator<<(std::ostream &os, const Game &game) {
-    os << "Game [score: " << game.score << "]";
-    return os;
+bool Game::isRunning() {
+    return running;
 }

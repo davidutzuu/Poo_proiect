@@ -10,21 +10,24 @@
 // Clasa Singleton care gestioneaza logica generala a jocului.
 class Game {
 private:
+    static Game* instance; // Instanța unică
     Ball ball;
     Paddle paddle;
     std::vector<Brick> bricks;
     int score; // Scorul jucatorului.
     bool running; // Starea jocului: ruleaza sau nu.
 
-public:
-    Game(); // Constructor.
+    Game(); // Constructor privat
 
-    static void initialize(); // Initializeaza jocul.
+public:
+    static Game* getInstance(); // Returneaza instanta Singleton
+    static void destroyInstance(); // Distruge instanta
+
+    void initialize(); // Initializeaza jocul.
     void update(); // Actualizeaza logica jocului.
-    void render(); // Deseneaza componentele jocului.
-    [[nodiscard]] bool isRunning() const;
-    void handleInput(char input); // Gestioneaza inputul de la utilizator.
-    friend std::ostream &operator<<(std::ostream &os, const Game &game);
+    void render(); // Redeneaza jocul.
+    void handleInput(char input);
+    bool isRunning();
 };
 
-#endif // GAME_H
+#endif

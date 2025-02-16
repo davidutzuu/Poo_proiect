@@ -1,4 +1,4 @@
-#include "C:\\Users\\Admin\\Documents\\GitHub\\Poo_proiect\\11\\Game.h"
+#include "C:\Users/Admin/Documents/GitHub/Poo_proiect/11/Game.h"
 #include <iostream>
 
 int main() {
@@ -14,12 +14,12 @@ int main() {
         } catch (const std::exception &e) {
             std::cerr << "Error: " << e.what() << std::endl;
         }
-        game->update();
-        game->render();
     }
 
-    std::cout << "Game Over!" << std::endl;
+    game->update();
+    game->render();
 
+    std::cout << "Game Over!" << std::endl;
     Game::destroyInstance(); // Eliberăm memoria Singleton.
     return 0;
 }
